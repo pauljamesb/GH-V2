@@ -1,0 +1,83 @@
+﻿@model GraniteHouse.Models.ViewModel.ProductsViewModel
+
+@using GraniteHouse.Extensions
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+<form method="post" enctype="multipart/form-data">
+
+    <input hidden asp-for="Products.Id" />
+
+    <div class="col-8">
+
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Products.Name"></label><br />
+            <input asp-for="Products.Name" />
+            <span asp-validation-for="Products.Name" class="text-danger"></span>
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Products.Price"></label><br />
+            <input asp-for="Products.Price" />
+            <span asp-validation-for="Products.Price" class="text-danger"></span>
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Products.Image"></label><br />
+            <input type="file" name="files" multiple class="form-control" />
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="ProductTypes"></label><br />
+
+            <!-- drop downs here -->
+            <select asp-for="@Model.Products.ProductTypeId" asp-items="Model.ProductTypes.ToSelectListItem(Model.Products.ProductTypeId)" class="form-control"></select>
+
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="MySpecialTags"></label><br />
+
+            <!-- drop downs here -->
+            <select asp-for="@Model.Products.SpecialTagsId" asp-items="Model.MySpecialTags.ToSelectListItem(Model.Products.SpecialTagsId)" class="form-control"></select>
+
+
+
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Products.ShadeColor"></label><br />
+            <input asp-for="Products.ShadeColor" />
+            <span asp-validation-for="Products.ShadeColor" class="text-danger"></span>
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Products.Available"></label><br />
+            <input type="checkbox" asp-for="Products.Available" />
+        </div>
+
+    </div>
+
+    <div class="col-3">
+        <img src="@Model.Products.Image" width="100%" />
+    </div>
+
+
+
+
+
+
+
+
+
+    <input type="submit" value="Create" />
+    <a asp-action="Index">Back to list</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
